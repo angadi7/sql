@@ -10,16 +10,16 @@ public class StackSorter {
         while (!stack.isEmpty()) {
             int current = stack.pop();
 
-            // Move elements from tempStack back to stack until the correct position for current is found
+            
             while (!tempStack.isEmpty() && tempStack.peek() > current) {
                 stack.push(tempStack.pop());
             }
 
-            // Push the current element onto the tempStack
+            
             tempStack.push(current);
         }
 
-        // Transfer elements back from tempStack to stack so that the smallest items are on top
+        
         while (!tempStack.isEmpty()) {
             stack.push(tempStack.pop());
         }
