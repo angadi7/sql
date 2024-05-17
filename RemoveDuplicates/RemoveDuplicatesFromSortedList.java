@@ -7,9 +7,9 @@ public class RemoveDuplicatesFromSortedList {
         
         while (current != null && current.next != null) {
             if (current.val == current.next.val) {
-                current.next = current.next.next; // Skip the duplicate node
+                current.next = current.next.next; 
             } else {
-                current = current.next; // Move to the next node
+                current = current.next; 
             }
         }
         
