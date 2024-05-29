@@ -1,4 +1,4 @@
-package com.dynamicprogrammingalgorithms;
+package com.Day20;
 
 public class KnapsackAssign {
     
