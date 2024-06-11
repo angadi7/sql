@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu li {
+    margin: 0;
+}
+
+.nav-menu li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.nav-menu li a:hover {
+    background-color: #111;
+}
+
+.nav-menu li a.current {
+    background-color: #4CAF50;
+}
+
+section {
+    padding: 20px;
+}
+
+section h1 {
+    font-size: 2em;
+}
+
+section p {
+    font-size: 1.2em;
+}
