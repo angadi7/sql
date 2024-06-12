@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-column Layout with Flexbox</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">Header</header>
+        <nav class="nav">Navigation</nav>
+        <main class="main">Main Content</main>
+        <aside class="aside">Sidebar</aside>
+        <footer class="footer">Footer</footer>
+    </div>
+</body>
+</html>
+
+
+
+--------------------------------------------------------------------------------
+
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container to hold the layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header, nav, main, aside, and footer styles */
+.header, .nav, .main, .aside, .footer {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Flexbox layout for the main content area */
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+/* Specific styles for each section */
+.header {
+    background-color: #f4b41a;
+}
+
+.nav {
+    background-color: #4caf50;
+}
+
+.main {
+    background-color: #2196f3;
+    flex: 3;
+}
+
+.aside {
+    background-color: #ff5722;
+    flex: 1;
+}
+
+.footer {
+    background-color: #607d8b;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .main-container {
+        flex-direction: row;
+    }
+}
