@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Multi-column Layout with Flexbox</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">Header</header>
+        <nav class="nav">Navigation</nav>
+        <div class="main-container">
+            <main class="main">Main Content</main>
+            <aside class="aside">Sidebar</aside>
+        </div>
+        <footer class="footer">Footer</footer>
+    </div>
+</body>
+</html>
+
+
+------------------------------------------------------------------------
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container to hold the layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header, nav, main, aside, and footer styles */
+.header, .nav, .main, .aside, .footer {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Flexbox layout for the main content area */
+.main-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+/* Specific styles for each section */
+.header {
+    background-color: #f4b41a;
+    text-align: center;
+}
+
+.nav {
+    background-color: #4caf50;
+    animation: slideIn 1s ease-in-out;
+}
+
+.main {
+    background-color: #2196f3;
+    flex: 3;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.aside {
+    background-color: #ff5722;
+    flex: 1;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.footer {
+    background-color: #607d8b;
+    text-align: center;
+}
+
+/* CSS3 Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .main-container {
+        flex-direction: row;
+    }
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 767px) {
+    .nav, .main, .aside, .footer, .header {
+        padding: 15px;
+        margin: 5px;
+    }
+
+    .nav {
+        animation: slideInMobile 1s ease-in-out;
+    }
+
+    .main, .aside {
+        animation: fadeInMobile 2s ease-in-out;
+    }
+
+    @keyframes slideInMobile {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeInMobile {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
