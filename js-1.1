@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Management</title>
+    <script defer src="UserProfile.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Profile Management</h1>
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter new name">
+        <button onclick="changeUserName()">Change Name</button>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter new email">
+        <button onclick="changeUserEmail()">Change Email</button>
+    </div>
+
+    <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" placeholder="Enter age">
+        <button onclick="showBirthYear()">Calculate Birth Year</button>
+    </div>
+
+    <h2>Current User Info</h2>
+    <p id="userInfo"></p>
+
+    <script>
+        // Define the user object in the script tag to access it in the DOM
+        const user = {
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            age: 25
+        };
+
+        function displayUserInfo() {
+            const userInfo = document.getElementById('userInfo');
+            userInfo.textContent = `Name: ${user.name}, Email: ${user.email}, Age: ${user.age}`;
+        }
+
+        function changeUserName() {
+            const newName = document.getElementById('name').value;
+            changeName(newName);
+            displayUserInfo();
+        }
+
+        function changeUserEmail() {
+            const newEmail = document.getElementById('email').value;
+            updateEmail(newEmail);
+            displayUserInfo();
+        }
+
+        function showBirthYear() {
+            const newAge = parseInt(document.getElementById('age').value, 10);
+            if (Number.isInteger(newAge) && newAge > 0) {
+                user.age = newAge;
+                const birthYear = calculateBirthYear();
+                alert(`User's birth year is: ${birthYear}`);
+                displayUserInfo();
+            } else {
+                alert('Invalid age');
+            }
+        }
+
+        // Initial display of user info
+        displayUserInfo();
+
+        // Functions from UserProfile.js
+        function changeName(newName) {
+            if (typeof newName === 'string' && newName.length > 0) {
+                user.name = newName;
+            } else {
+                console.error('Invalid name');
+            }
+        }
+
+        function updateEmail(newEmail) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(newEmail)) {
+                user.email = newEmail;
+            } else {
+                console.error('Invalid email');
+            }
+        }
+
+        function calculateBirthYear() {
+            const currentYear = new Date().getFullYear();
+            return currentYear - user.age;
+        }
+    </script>
+</body>
+</html>
