@@ -1,0 +1,44 @@
+// User object
+const user = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    age: 25
+};
+
+// Function to change the user's name
+function changeName(newName) {
+    if (typeof newName === 'string' && newName.length > 0) {
+        user.name = newName;
+    } else {
+        console.error('Invalid name');
+    }
+}
+
+// Function to update the user's email
+function updateEmail(newEmail) {
+    // Simple email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(newEmail)) {
+        user.email = newEmail;
+    } else {
+        console.error('Invalid email');
+    }
+}
+
+// Function to calculate the user's birth year
+function calculateBirthYear() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - user.age;
+}
+
+// Test the functions
+console.log('Initial user object:', user);
+
+changeName('Alice Johnson');
+console.log('After name change:', user);
+
+updateEmail('alice.johnson@example.com');
+console.log('After email update:', user);
+
+const birthYear = calculateBirthYear();
+console.log('User\'s birth year:', birthYear);
