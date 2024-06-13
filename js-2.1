@@ -1,0 +1,78 @@
+// User object
+const user = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    age: 25
+};
+
+// Function to change the user's name
+function changeName(newName) {
+    if (typeof newName === 'string' && newName.length > 0) {
+        user.name = newName;
+    } else {
+        console.error('Invalid name');
+    }
+}
+
+// Function to update the user's email
+function updateEmail(newEmail) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(newEmail)) {
+        user.email = newEmail;
+    } else {
+        console.error('Invalid email');
+    }
+}
+
+// Function to validate the email format
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Function to calculate the user's birth year
+function calculateBirthYear() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - user.age;
+}
+
+// DOM Manipulation Functions
+function displayUserInfo() {
+    const userInfo = document.getElementById('userInfo');
+    userInfo.textContent = `Name: ${user.name}, Email: ${user.email}, Age: ${user.age}`;
+}
+
+function changeUserName() {
+    const newName = document.getElementById('name').value;
+    changeName(newName);
+    displayUserInfo();
+}
+
+function changeUserEmail() {
+    const newEmail = document.getElementById('email').value;
+    const emailError = document.getElementById('emailError');
+
+    if (validateEmail(newEmail)) {
+        updateEmail(newEmail);
+        emailError.textContent = '';
+    } else {
+        emailError.textContent = 'Invalid email format';
+    }
+
+    displayUserInfo();
+}
+
+function showBirthYear() {
+    const newAge = parseInt(document.getElementById('age').value, 10);
+    if (Number.isInteger(newAge) && newAge > 0) {
+        user.age = newAge;
+        const birthYear = calculateBirthYear();
+        alert(`User's birth year is: ${birthYear}`);
+        displayUserInfo();
+    } else {
+        alert('Invalid age');
+    }
+}
+
+// Initial display of user info
+document.addEventListener('DOMContentLoaded', displayUserInfo);
