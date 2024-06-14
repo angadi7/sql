@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration</title>
+<style>
+  .success-message {
+    color: green;
+    font-size: 1.2em;
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <h2>User Registration Form</h2>
+  <form id="registration-form">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+  <p class="success-message" id="success-message">Registration Successful!</p>
+
+  <script>
+    document.getElementById('registration-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting the traditional way
+
+      // Here you can add your form validation and AJAX request if needed
+      // For simplicity, we'll just display the success message
+
+      document.getElementById('success-message').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
+
+
+-------------------------------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Login</title>
+</head>
+<body>
+  <h2>User Login Form</h2>
+  <form id="login-form">
+    <div>
+      <label for="login-username">Username or Email:</label>
+      <input type="text" id="login-username" name="login-username" required>
+    </div>
+    <div>
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" name="login-password" required>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting the traditional way
+
+      // Here you can add your form validation and AJAX request if needed
+      // For simplicity, we'll just redirect to Instagram
+
+      window.location.href = 'https://www.instagram.com';
+    });
+  </script>
+</body>
+</html>
