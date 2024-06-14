@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Validation Form</h1>
+    <form id="emailForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <button type="button" onclick="validateEmail()"> Submit </button>
+    </form>
+    <p id="message" class="error"></p>
+ 
+    <script>
+        // Regular expression for validating email    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ 
+        // Function to validate the email format
+        function validateEmail() {
+            const emailInput = document.getElementById('email').value;
+            const messageElement = document.getElementById('message');
+ 
+            if (emailRegex.test(emailInput)) {
+                messageElement.textContent = 'Email format is correct.';
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = 'Invalid email format. Please enter a valid email address.';
+                messageElement.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
