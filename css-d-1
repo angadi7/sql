@@ -77,3 +77,82 @@ button:hover {
   margin-top: 20px;
 }
 
+
+-----------------------------------------------------------
+
+document.getElementById('registration-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting the traditional way
+  
+  // Get form values
+  const username = document.getElementById('username').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const confirmPassword = document.getElementById('confirm-password').value.trim();
+  
+  // Clear previous error messages
+  clearErrors();
+  
+  // Validation checks
+  let valid = true;
+  
+  if (username === '') {
+    showError('username', 'Username is required');
+    valid = false;
+  }
+  
+  if (!validateEmail(email)) {
+    showError('email', 'Invalid email format');
+    valid = false;
+  }
+  
+  if (password.length < 6) {
+    showError('password', 'Password must be at least 6 characters long');
+    valid = false;
+  }
+  
+  if (password !== confirmPassword) {
+    showError('confirm-password', 'Passwords do not match');
+    valid = false;
+  }
+  
+  // If all validations pass, show success message
+  if (valid) {
+    document.getElementById('success-message').style.display = 'block';
+  }
+});
+
+function showError(inputId, message) {
+  const inputField = document.getElementById(inputId);
+  const errorSpan = document.createElement('span');
+  errorSpan.classList.add('error-message');
+  errorSpan.innerText = message;
+  inputField.parentElement.appendChild(errorSpan);
+  inputField.style.borderColor = 'red';
+}
+
+function clearErrors() {
+  const errorMessages = document.querySelectorAll('.error-message');
+  errorMessages.forEach(function(message) {
+    message.remove();
+  });
+  const inputs = document.querySelectorAll('input');
+  inputs.forEach(function(input) {
+    input.style.borderColor = '#ddd';
+  });
+}
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+}
+
+
+----------------------------------------------------------------
+
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
