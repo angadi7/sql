@@ -1,170 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration</title>
+<style>
+  /* Basic styling for demonstration */
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+  <h2>User Registration</h2>
+  <form id="registrationForm" action="#" method="post" onsubmit="handleRegistration(event)">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p id="registrationSuccess" style="display: none; color: green;">Registration successful!</p>
+
+  <script>
+    function handleRegistration(event) {
+      event.preventDefault(); // Prevent form submission
+      document.getElementById("registrationForm").reset(); // Reset form fields
+      document.getElementById("registrationSuccess").style.display = "block"; // Show success message
+    }
+  </script>
+</body>
+</html>
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Login</title>
+<style>
+  /* Basic styling for demonstration */
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+  <h2>User Login</h2>
+  <form id="loginForm" action="#" method="post" onsubmit="handleLogin(event)">
+    <label for="loginUsername">Username or Email:</label><br>
+    <input type="text" id="loginUsername" name="loginUsername" required><br><br>
+
+    <label for="loginPassword">Password:</label><br>
+    <input type="password" id="loginPassword" name="loginPassword" required><br><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p id="loginSuccess" style="display: none; color: green;">Login successful!</p>
+
+  <script>
+    function handleLogin(event) {
+      event.preventDefault(); // Prevent form submission
+      document.getElementById("loginForm").reset(); // Reset form fields
+      document.getElementById("loginSuccess").style.display = "block"; // Show success message
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+--------------------------------------------------------------------------------------------------------
+csss
+
+
+/* Global styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
   margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-  color: #333;
   text-align: center;
+  color: #333;
 }
 
 form {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-}
-
-form div {
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
   color: #555;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
   font-size: 16px;
-  color: #333;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-  border-color: #007BFF;
-  outline: none;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007BFF;
-  border: none;
-  border-radius: 4px;
+button[type="submit"] {
+  background-color: #4CAF50;
   color: white;
+  border: none;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 16px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+button[type="submit"]:hover {
+  background-color: #45a049;
 }
 
 .success-message {
-  color: green;
-  font-size: 1.2em;
-  display: none;
   text-align: center;
   margin-top: 20px;
+  color: #4CAF50;
 }
 
 
------------------------------------------------------------
 
-document.getElementById('registration-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the form from submitting the traditional way
-  
-  // Get form values
-  const username = document.getElementById('username').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const confirmPassword = document.getElementById('confirm-password').value.trim();
-  
-  // Clear previous error messages
-  clearErrors();
-  
-  // Validation checks
-  let valid = true;
-  
+------------------------------------------------------------------------------------------
+
+
+
+// Function to validate registration form
+function validateRegistrationForm() {
+  let username = document.getElementById('username').value.trim();
+  let email = document.getElementById('email').value.trim();
+  let password = document.getElementById('password').value.trim();
+
+  let isValid = true;
+
+  // Validate username
   if (username === '') {
-    showError('username', 'Username is required');
-    valid = false;
+    isValid = false;
+    setErrorFor('username', 'Username cannot be blank');
+  } else {
+    setSuccessFor('username');
   }
-  
-  if (!validateEmail(email)) {
-    showError('email', 'Invalid email format');
-    valid = false;
+
+  // Validate email
+  if (email === '') {
+    isValid = false;
+    setErrorFor('email', 'Email cannot be blank');
+  } else if (!isEmailValid(email)) {
+    isValid = false;
+    setErrorFor('email', 'Email is not valid');
+  } else {
+    setSuccessFor('email');
   }
-  
-  if (password.length < 6) {
-    showError('password', 'Password must be at least 6 characters long');
-    valid = false;
+
+  // Validate password
+  if (password === '') {
+    isValid = false;
+    setErrorFor('password', 'Password cannot be blank');
+  } else {
+    setSuccessFor('password');
   }
-  
-  if (password !== confirmPassword) {
-    showError('confirm-password', 'Passwords do not match');
-    valid = false;
+
+  return isValid;
+}
+
+// Function to validate login form
+function validateLoginForm() {
+  let loginUsername = document.getElementById('loginUsername').value.trim();
+  let loginPassword = document.getElementById('loginPassword').value.trim();
+
+  let isValid = true;
+
+  // Validate username or email
+  if (loginUsername === '') {
+    isValid = false;
+    setErrorFor('loginUsername', 'Username or Email cannot be blank');
+  } else {
+    setSuccessFor('loginUsername');
   }
-  
-  // If all validations pass, show success message
-  if (valid) {
-    document.getElementById('success-message').style.display = 'block';
+
+  // Validate password
+  if (loginPassword === '') {
+    isValid = false;
+    setErrorFor('loginPassword', 'Password cannot be blank');
+  } else {
+    setSuccessFor('loginPassword');
+  }
+
+  return isValid;
+}
+
+// Helper function to set error message for an input field
+function setErrorFor(inputId, message) {
+  let inputElement = document.getElementById(inputId);
+  let formControl = inputElement.parentElement;
+  let errorMessage = formControl.querySelector('small');
+
+  formControl.className = 'form-control error';
+  errorMessage.innerText = message;
+}
+
+// Helper function to set success style for an input field
+function setSuccessFor(inputId) {
+  let inputElement = document.getElementById(inputId);
+  let formControl = inputElement.parentElement;
+  formControl.className = 'form-control success';
+}
+
+// Helper function to check if an email is valid
+function isEmailValid(email) {
+  // Basic email validation regex (you can improve this as per your requirements)
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Event listeners for form submission
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+  if (!validateRegistrationForm()) {
+    event.preventDefault(); // Prevent form submission if validation fails
+  } else {
+    // Clear success message if validation passes
+    document.getElementById('registrationSuccess').style.display = 'none';
   }
 });
 
-function showError(inputId, message) {
-  const inputField = document.getElementById(inputId);
-  const errorSpan = document.createElement('span');
-  errorSpan.classList.add('error-message');
-  errorSpan.innerText = message;
-  inputField.parentElement.appendChild(errorSpan);
-  inputField.style.borderColor = 'red';
-}
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+  if (!validateLoginForm()) {
+    event.preventDefault(); // Prevent form submission if validation fails
+  } else {
+    // Clear success message if validation passes
+    document.getElementById('loginSuccess').style.display = 'none';
+  }
+});
 
-function clearErrors() {
-  const errorMessages = document.querySelectorAll('.error-message');
-  errorMessages.forEach(function(message) {
-    message.remove();
-  });
-  const inputs = document.querySelectorAll('input');
-  inputs.forEach(function(input) {
-    input.style.borderColor = '#ddd';
-  });
-}
-
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-}
-
-
-----------------------------------------------------------------
-
-
-.error-message {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
-}
---------------------------------------
-
-
-
-/* styles.css */
-body {
-  background-image: url('path/to/your/image.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* Additional styles for body if needed */
-}
 
