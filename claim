@@ -1,0 +1,44 @@
+package com.example.servlet;
+
+import java.io.Serializable;
+
+public class Claim implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String policyNumber;
+    private double claimAmount;
+    private String description;
+
+    public Claim() {
+    }
+
+    public Claim(String policyNumber, double claimAmount, String description) {
+        this.policyNumber = policyNumber;
+        this.claimAmount = claimAmount;
+        this.description = description;
+    }
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
+
+    public double getClaimAmount() {
+        return claimAmount;
+    }
+
+    public void setClaimAmount(double claimAmount) {
+        this.claimAmount = claimAmount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}
