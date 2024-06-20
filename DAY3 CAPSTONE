@@ -1,0 +1,216 @@
+<dependencies>
+    <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>5.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>jakarta.servlet.jsp</groupId>
+        <artifactId>jakarta.servlet.jsp-api</artifactId>
+        <version>3.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+
+
+
+-----------------------------------------------------------------
+
+
+
+package com.example.servlet;
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/submitClaim")
+public class ClaimSubmissionServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Retrieve form data
+        String policyNumber = request.getParameter("policyNumber");
+        String claimAmount = request.getParameter("claimAmount");
+        String description = request.getParameter("description");
+
+        // Create a Claim object
+        Claim claim = new Claim(policyNumber, Double.parseDouble(claimAmount), description);
+
+        // Store claim object in request
+        request.setAttribute("claim", claim);
+
+        // Forward to confirmation page
+        request.getRequestDispatcher("confirmClaim.jsp").forward(request, response);
+    }
+}
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+package com.example.servlet;
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/confirmClaim")
+public class ClaimConfirmationServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Retrieve claim object from request
+        Claim claim = (Claim) request.getAttribute("claim");
+
+        // Process the claim (e.g., save to database)
+        // For simplicity, just set an attribute and forward to a success page
+        request.setAttribute("message", "Claim submitted successfully!");
+
+        // Forward to success page
+        request.getRequestDispatcher("success.jsp").forward(request, response);
+    }
+}
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Claim</title>
+</head>
+<body>
+    <h2>Submit Insurance Claim</h2>
+    <form action="submitClaim" method="post">
+        <label for="policyNumber">Policy Number:</label><br>
+        <input type="text" id="policyNumber" name="policyNumber" required><br>
+        
+        <label for="claimAmount">Claim Amount:</label><br>
+        <input type="number" id="claimAmount" name="claimAmount" required><br>
+        
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" required></textarea><br>
+        
+        <input type="submit" value="Submit Claim">
+    </form>
+</body>
+</html>
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Claim</title>
+</head>
+<body>
+    <h2>Confirm Insurance Claim</h2>
+    <p>Policy Number: ${claim.policyNumber}</p>
+    <p>Claim Amount: ${claim.claimAmount}</p>
+    <p>Description: ${claim.description}</p>
+
+    <form action="confirmClaim" method="post">
+        <input type="hidden" name="policyNumber" value="${claim.policyNumber}">
+        <input type="hidden" name="claimAmount" value="${claim.claimAmount}">
+        <input type="hidden" name="description" value="${claim.description}">
+        
+        <input type="submit" value="Confirm Claim">
+    </form>
+</body>
+</html>
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Claim Submitted</title>
+</head>
+<body>
+    <h2>${message}</h2>
+</body>
+</html>
+
+
+
+
+-------------------------------------------
+
+
+
+package com.example.servlet;
+
+import java.io.Serializable;
+
+public class Claim implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String policyNumber;
+    private double claimAmount;
+    private String description;
+
+    public Claim() {
+    }
+
+    public Claim(String policyNumber, double claimAmount, String description) {
+        this.policyNumber = policyNumber;
+        this.claimAmount = claimAmount;
+        this.description = description;
+    }
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
+
+    public double getClaimAmount() {
+        return claimAmount;
+    }
+
+    public void setClaimAmount(double claimAmount) {
+        this.claimAmount = claimAmount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}
+
+
+
+--------------------------------------------------------------
+
+
+
